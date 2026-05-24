@@ -217,6 +217,7 @@ const MSCSL_KNOWLEDGE = {
 * **주소 (영문)**: Metabolic Syndrome and Cell Signaling Laboratory in Institute for Cancer Research, Department of Pharmacology, College of Medicine, Chungnam National University, 266 Munhwa-ro, Jung-gu, Daejeon, 35015, South Korea
 * **주소 (한글)**: 대전광역시 중구 문화로 266, 충남대학교 의과대학 약리학교실 암연구소 내 MSCSL (우편번호 35015)
 * **전화**: +82-42-280-6768
+* **연구실 내선**: 042-580-8252
 * **팩스**: +82-42-585-6627
 * **교수님 이메일**: insulin@cnu.ac.kr
 * **교수님 휴대폰**: 010-2784-6895
@@ -716,12 +717,12 @@ function getLocalKnowledgeResponse(query) {
 // 20. 구글 Gemini API 통신 및 시스템 콘텍스트 주입 로직
 async function fetchGeminiResponse(userQuery) {
     const API_KEY = appState.geminiApiKey;
-    // 최신 gemini-1.5-flash 모델 엔드포인트 호출
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
-    // RAG 컨텍스트 설계 (연구실의 모든 정보를 Gemini에게 가르칩니다.)
-    const systemInstruction = `
-너는 충남대학교 의과대학 약리학교실의 '대사성증후군 및 세포신호전달 연구실 (MSCSL)' 공식 AI 비서다.
+    const requestBody = {
+        systemInstruction: {
+            parts: [{
+                text: `너는 충남대학교 의과대학 약리학교실의 '대사성증후군 및 세포신호전달 연구실 (MSCSL)' 공식 AI 비서다.
 지도교수님은 25년간 재직하신 박종선 교수님 (Prof. Jongsun Park, Ph.D.)이시다.
 아래에 제공하는 연구실 공식 정보(홈페이지 http://cell-signaling.net/, https://mscsl.weebly.com/ 및 창업회사 https://www.mitos-thera.com/ 데이터 기반)를 최우선 기준으로 준수하여 사용자에게 한국어로 친절하고 전문적으로 답해라.
 
@@ -760,40 +761,35 @@ ${MSCSL_KNOWLEDGE.members}
 - 연구실이나 의학 관련 질문에 대해서는 최대한 상세하고 신뢰성 있게 학술적인 어조를 가미하여 답변해라.
 - PHF20, CTMP, LETM1, PI3K, PKB/Akt 등 핵심 연구 단백질에 대해서는 자신 있게 설명해라.
 - 제공된 정보 외의 답변이 필요할 때는 "연구실 공식 문서 이외의 전문 지식을 기반으로 보완하여 답변드립니다"라고 상기시키고 정확한 의학/생명과학 지식으로 보완해라.
-- 인사는 늘 공손하고 메디컬 연구실의 품위가 드러나게 해라.
-`;
-
-    const requestBody = {
+- 인사는 늘 공손하고 메디컬 연구실의 품위가 드러나게 해라.`
+            }]
+        },
         contents: [
             {
                 role: "user",
-                parts: [
-                    { text: `시스템 컨텍스트 지침: ${systemInstruction}\n\n사용자 질문: ${userQuery}` }
-                ]
+                parts: [{ text: userQuery }]
             }
         ],
         generationConfig: {
-            temperature: 0.2, // 학술적이고 정밀한 응답을 유도
-            maxOutputTokens: 1000
+            temperature: 0.2,
+            maxOutputTokens: 1500
         }
     };
 
     const response = await fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error?.message || 'Gemini API 호출에 실패했습니다.');
+        throw new Error(`[${response.status}] ${errorData.error?.message || 'Gemini API 호출에 실패했습니다.'}`);
     }
 
     const data = await response.json();
     const botText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    
+
     if (!botText) {
         throw new Error('AI 응답 포맷이 맞지 않습니다.');
     }
