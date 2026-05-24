@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- 배경 그라디언트 -->
+    <radialGradient id="bg" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#1e9e92"/>
+      <stop offset="100%" stop-color="#063e3c"/>
+    </radialGradient>
+    <!-- 미토콘드리아 그라디언트 -->
+    <linearGradient id="mitoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d0f5f2"/>
+      <stop offset="100%" stop-color="#80d5cf"/>
+    </linearGradient>
+    <!-- 화살표 마커 (흰색) -->
+    <marker id="wArr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M 0 0 L 7 3.5 L 0 7 z" fill="rgba(255,255,255,0.85)"/>
+    </marker>
+    <!-- 화살표 마커 (노란색) -->
+    <marker id="yArr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M 0 0 L 7 3.5 L 0 7 z" fill="#fbbf24"/>
+    </marker>
+    <!-- 글로우 필터 -->
+    <filter id="glow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#ef4444" flood-opacity="0.6" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ① 배경 원 -->
+  <circle cx="256" cy="256" r="252" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="244" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
+
+  <!-- ② 세포막 (점선 원) - 세포를 표현 -->
+  <circle cx="256" cy="230" r="178" fill="none"
+          stroke="rgba(255,255,255,0.20)" stroke-width="6" stroke-dasharray="18 9"/>
+
+  <!-- ③ 미토콘드리아 (에너지 대사의 핵심) -->
+  <!-- 외막 -->
+  <ellipse cx="256" cy="218" rx="148" ry="86" fill="url(#mitoGrad)" opacity="0.93"/>
+  <!-- 내막 주름 (크리스타 Cristae) — 3개 웨이브 라인 -->
+  <path d="M 134,198 C 158,177 180,198 204,198 C 228,198 250,177 274,198 C 298,198 320,177 344,198 C 356,198 368,191 378,198"
+        fill="none" stroke="#075c5a" stroke-width="3" stroke-linecap="round" opacity="0.70"/>
+  <path d="M 118,218 C 142,197 164,218 188,218 C 212,218 234,197 258,218 C 282,218 304,197 328,218 C 352,218 368,209 385,218"
+        fill="none" stroke="#075c5a" stroke-width="3" stroke-linecap="round" opacity="0.70"/>
+  <path d="M 134,238 C 158,259 180,238 204,238 C 228,238 250,259 274,238 C 298,238 320,259 344,238 C 356,238 368,245 378,238"
+        fill="none" stroke="#075c5a" stroke-width="3" stroke-linecap="round" opacity="0.70"/>
+  <!-- 기질 (Matrix) + ATP 라벨 -->
+  <ellipse cx="256" cy="218" rx="52" ry="30" fill="#0a5c5a" opacity="0.30"/>
+  <text x="256" y="223" text-anchor="middle" fill="white"
+        font-size="19" font-weight="bold" font-family="Arial, sans-serif" opacity="0.95">ATP</text>
+
+  <!-- ④ PI3K/Akt/PHF20 신호전달 캐스케이드 (상단 오른쪽) -->
+  <!-- 수용체 (RTK) -->
+  <rect x="356" y="85" width="68" height="28" rx="14" fill="white" opacity="0.88"/>
+  <text x="390" y="103" text-anchor="middle" fill="#0a5c5a"
+        font-size="13" font-weight="bold" font-family="Arial">RTK</text>
+  <!-- RTK → PI3K 화살표 -->
+  <path d="M 372,113 L 352,140" stroke="rgba(255,255,255,0.80)"
+        stroke-width="2.2" marker-end="url(#wArr)" fill="none"/>
+  <!-- PI3K 노드 -->
+  <circle cx="340" cy="158" r="24" fill="white" opacity="0.88"/>
+  <text x="340" y="154" text-anchor="middle" fill="#0a5c5a"
+        font-size="10" font-weight="bold" font-family="Arial">PI3K</text>
+  <text x="340" y="167" text-anchor="middle" fill="#0a5c5a"
+        font-size="10" font-family="Arial">Akt</text>
+  <!-- PI3K → PHF20 화살표 -->
+  <path d="M 323,170 L 308,188" stroke="rgba(255,255,255,0.80)"
+        stroke-width="2.2" marker-end="url(#wArr)" fill="none"/>
+  <!-- PHF20 노드 (노란색 강조 — 핵심 연구 타겟) -->
+  <circle cx="296" cy="206" r="26" fill="#f59e0b" opacity="0.95"/>
+  <text x="296" y="202" text-anchor="middle" fill="#431407"
+        font-size="9" font-weight="bold" font-family="Arial">PHF20</text>
+  <text x="296" y="215" text-anchor="middle" fill="#431407"
+        font-size="12" font-weight="bold" font-family="Arial">⊕P</text>
+
+  <!-- ⑤ LETM1 / CTMP 보조 노드 (왼쪽) -->
+  <circle cx="150" cy="145" r="26" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+  <text x="150" y="141" text-anchor="middle" fill="white"
+        font-size="9" font-weight="bold" font-family="Arial">LETM1</text>
+  <text x="150" y="154" text-anchor="middle" fill="#a8ddd8"
+        font-size="9" font-family="Arial">CTMP</text>
+  <!-- LETM1 → 미토콘드리아 화살표 -->
+  <path d="M 165,166 L 185,188" stroke="rgba(255,255,255,0.55)"
+        stroke-width="1.8" marker-end="url(#wArr)" fill="none" stroke-dasharray="4,3"/>
+
+  <!-- ⑥ AMP → ADP → ATP 에너지 체인 (하단) -->
+  <!-- AMP -->
+  <circle cx="138" cy="338" r="23" fill="rgba(255,255,255,0.18)"
+          stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+  <text x="138" y="343" text-anchor="middle" fill="white"
+        font-size="12" font-weight="bold" font-family="Arial">AMP</text>
+  <!-- 고에너지 결합 기호 -->
+  <text x="170" y="342" text-anchor="middle" fill="#fbbf24"
+        font-size="22" font-family="Arial">~</text>
+  <!-- ADP -->
+  <circle cx="202" cy="338" r="23" fill="rgba(255,255,255,0.18)"
+          stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+  <text x="202" y="343" text-anchor="middle" fill="white"
+        font-size="12" font-weight="bold" font-family="Arial">ADP</text>
+  <!-- 고에너지 결합 기호 (빨간색 — 고에너지 인산 결합) -->
+  <text x="234" y="342" text-anchor="middle" fill="#ef4444"
+        font-size="22" font-family="Arial">~</text>
+  <!-- ATP (메인 — 글로우 효과) -->
+  <circle cx="268" cy="338" r="30" fill="#ef4444" stroke="#fca5a5"
+          stroke-width="2" filter="url(#glow)"/>
+  <text x="268" y="343" text-anchor="middle" fill="white"
+        font-size="15" font-weight="bold" font-family="Arial">ATP</text>
+  <!-- 에너지 방출 번개 아이콘 -->
+  <path d="M 302,325 Q 340,300 355,318" fill="none" stroke="#fbbf24"
+        stroke-width="2.2" stroke-dasharray="5,3" marker-end="url(#yArr)"/>
+  <text x="360" y="314" fill="#fbbf24" font-size="16" font-family="Arial">⚡</text>
+
+  <!-- ⑦ MSCSL 텍스트 -->
+  <text x="256" y="408" text-anchor="middle" fill="white"
+        font-size="46" font-weight="900"
+        font-family="Arial Black, Arial, sans-serif" letter-spacing="5">MSCSL</text>
+  <text x="256" y="434" text-anchor="middle" fill="rgba(185,238,235,0.88)"
+        font-size="11" font-family="Arial, sans-serif" letter-spacing="0.6">
+    Metabolic Syndrome · Cell Signaling · CNU
+  </text>
+</svg>
