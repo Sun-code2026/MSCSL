@@ -213,10 +213,12 @@ const MSCSL_KNOWLEDGE = {
 
     location: `📍 **연구실 위치 및 연락처 안내**
 * **연구실명**: 대사성증후군 및 세포신호전달 연구실 (MSCSL)
-* **주소 (영문)**: Rm 3006, Biomedical Convergence Research Center, Dept. of Pharmacology and Medical Science, College of Medicine, Chungnam National University, 266 Munhwa-Ro, Jung-Gu, Daejeon, 35015, South Korea
-* **주소 (한글)**: 대전광역시 중구 문화로 266, 충남대학교 의과대학 생의학연구원 3006호 (우편번호 35015)
+* **소속기관**: 암연구소 내 대사성증후군 및 세포신호전달 연구실 (Institute for Cancer Research)
+* **주소 (영문)**: Metabolic Syndrome and Cell Signaling Laboratory in Institute for Cancer Research, Department of Pharmacology, College of Medicine, Chungnam National University, 266 Munhwa-ro, Jung-gu, Daejeon, 35015, South Korea
+* **주소 (한글)**: 대전광역시 중구 문화로 266, 충남대학교 의과대학 약리학교실 암연구소 내 MSCSL (우편번호 35015)
+* **전화**: +82-42-280-6768
+* **팩스**: +82-42-585-6627
 * **교수님 이메일**: insulin@cnu.ac.kr
-* **교수님 오피스**: +82-42-280-6768
 * **교수님 휴대폰**: 010-2784-6895
 * **한글 홈페이지**: [cell-signaling.net](http://cell-signaling.net/)
 * **영문 홈페이지**: [mscsl.weebly.com](https://mscsl.weebly.com/)
