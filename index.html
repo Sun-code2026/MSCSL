@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MSCSL - 대사성증후군 및 세포신호전달 연구실 AI 챗봇</title>
+    
+    <!-- SEO 및 모바일 PWA 메타 태그 -->
+    <meta name="description" content="충남대학교 의과대학 약리학교실 대사성증후군 및 세포신호전달 연구실(MSCSL) 박종선 교수 연구팀의 공식 AI 챗봇 및 연구실 소개 애플리케이션입니다.">
+    <meta name="theme-color" content="#0A5C5A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MSCSL 챗봇">
+    
+    <!-- PWA 매니페스트 및 파비콘 -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/mscsl_logo.png">
+    <link rel="icon" type="image/png" href="assets/mscsl_logo.png">
+    
+    <!-- 프리미엄 폰트 (Outfit & Noto Sans KR) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide 아이콘 팩 (현대적이고 깔끔한 아이콘 시스템) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- 자체 스타일시트 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container" id="app-root">
+        <!-- 1. 좌측 사이드바 (데스크톱 상시 노출 / 모바일에서는 슬라이딩 드로어로 동작) -->
+        <aside class="sidebar-container" id="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/mscsl_logo.png" alt="MSCSL 로고" class="sidebar-logo" id="sidebar-logo-img">
+                <div class="sidebar-title-group">
+                    <h1 class="sidebar-title">MSCSL</h1>
+                    <p class="sidebar-subtitle">Metabolic Syndrome & Cell Signaling Lab</p>
+                </div>
+                <button class="close-sidebar-btn" id="close-sidebar-btn" aria-label="정보창 닫기">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <!-- 탭 메뉴 -->
+            <div class="tab-menu" id="sidebar-tabs">
+                <button class="tab-btn active" data-tab="tab-intro" id="btn-tab-intro">
+                    <i data-lucide="info"></i> 소개
+                </button>
+                <button class="tab-btn" data-tab="tab-research" id="btn-tab-research">
+                    <i data-lucide="microscope"></i> 연구 분야
+                </button>
+                <button class="tab-btn" data-tab="tab-rules" id="btn-tab-rules">
+                    <i data-lucide="book-open"></i> 연구실 안내
+                </button>
+            </div>
+            
+            <!-- 탭 콘텐츠 영역 -->
+            <div class="tab-content-container">
+                <!-- 탭 1: 연구실 및 교수님 소개 -->
+                <section class="tab-panel active" id="tab-intro">
+                    <div class="panel-section card">
+                        <h2 class="section-title"><i data-lucide="award" class="title-icon"></i> 연구실 소개</h2>
+                        <p class="intro-text">
+                            충남대학교 의과대학 약리학교실에 소속된 **대사성증후군 및 세포신호전달 연구실 (MSCSL)**은 세포 내 신호전달 체계의 이상으로 인해 발생하는 대사성 증후군(당뇨병, 비만)과 만성 퇴행성 질환(근감소증), 그리고 암에너지 대사의 조절 기전을 규명하고 이를 치료하기 위한 신약 타겟을 발굴하고 있습니다.
+                        </p>
+                    </div>
+                    
+                    <div class="panel-section card prof-card">
+                        <div class="prof-header">
+                            <div class="prof-avatar">
+                                <i data-lucide="user" class="prof-placeholder-icon"></i>
+                            </div>
+                            <div class="prof-info">
+                                <h3 class="prof-name">박종선 교수</h3>
+                                <p class="prof-title">약리학교실 주임교수 (학과장)</p>
+                                <span class="prof-tenure">충남대 의과대학 재직 | SCI 논문 113편</span>
+                            </div>
+                        </div>
+                        <div class="prof-body">
+                            <h4 class="prof-subtitle">주요 약력 및 경력</h4>
+                            <ul class="prof-bullets">
+                                <li>충남대학교 의과대학 약리학교실 정교수 · 학과장</li>
+                                <li>Ph.D. 생화학, Basel University, Switzerland (2001)</li>
+                                <li>이메일: insulin@cnu.ac.kr</li>
+                                <li>한국세포생물학회(KSCB) 총무이사, AACR·ADA 회원</li>
+                                <li>SCI 논문 121편 (Cell·Nature Commun·Science TM 등)</li>
+                                <li>㈜미토스테라퓨틱스 CEO (교원 창업)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 탭 2: 핵심 연구 분야 -->
+                <section class="tab-panel" id="tab-research">
+                    <div class="panel-section card research-card" data-research="diabetes">
+                        <div class="research-header">
+                            <span class="research-icon-wrapper diabetes-color">
+                                <i data-lucide="droplet"></i>
+                            </span>
+                            <h3 class="research-title">당뇨병 (Diabetes)</h3>
+                        </div>
+                        <p class="research-desc">
+                            인슐린 저항성(Insulin Resistance)의 분자생물학적 신호전달 기전을 분석합니다. 특히 골격근 및 간 조직에서의 포도당 대사 조절 경로를 규명하여 제2형 당뇨병의 근본적인 치료 타겟을 제시합니다.
+                        </p>
+                    </div>
+                    
+                    <div class="panel-section card research-card" data-research="cancer">
+                        <div class="research-header">
+                            <span class="research-icon-wrapper cancer-color">
+                                <i data-lucide="activity"></i>
+                            </span>
+                            <h3 class="research-title">암에너지 대사 (Cancer Energy)</h3>
+                        </div>
+                        <p class="research-desc">
+                            암세포가 생존 및 증식하기 위해 대사 경로를 재프로그래밍하는 기전(Warburg Effect 등)을 연구합니다. 암세포 특이적 에너지 대사 조절 유전자를 제어하는 신개념 대사 항암제 물질을 탐색합니다.
+                        </p>
+                    </div>
+                    
+                    <div class="panel-section card research-card" data-research="sarcopenia">
+                        <div class="research-header">
+                            <span class="research-icon-wrapper sarcopenia-color">
+                                <i data-lucide="dumbbell"></i>
+                            </span>
+                            <h3 class="research-title">근감소증 (Sarcopenia)</h3>
+                        </div>
+                        <p class="research-desc">
+                            노화 및 대사 질환에 따른 골격근 질량과 기능 저하(근감소증)의 분자 신호전달 기전을 연구합니다. 근육 줄기세포의 분화 조절 및 근위축(Muscle Atrophy)을 억제하는 활성 물질을 규명합니다.
+                        </p>
+                    </div>
+                </section>
+                
+                <!-- 탭 3: 연구실 안내 및 규칙 -->
+                <section class="tab-panel" id="tab-rules">
+                    <div class="panel-section card">
+                        <h3 class="section-title"><i data-lucide="navigation" class="title-icon"></i> 연구실 위치 & 연락처</h3>
+                        <ul class="contact-list">
+                            <li>
+                                <i data-lucide="map-pin"></i>
+                                <span>대전광역시 중구 문화로 266<br>충남대학교 의과대학 약리학 교실 (MSCSL)</span>
+                            </li>
+                            <li>
+                                <i data-lucide="phone"></i>
+                                <span>연구실 내선: 042-580-xxxx</span>
+                            </li>
+                            <li>
+                                <i data-lucide="mail"></i>
+                                <span>교수님 이메일: insulin@cnu.ac.kr</span>
+                            </li>
+                            <li>
+                                <i data-lucide="phone"></i>
+                                <span>오피스: 042-280-6768 / 휴대폰: 010-2784-6895</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section card">
+                        <h3 class="section-title"><i data-lucide="shield-alert" class="title-icon"></i> 연구실 근무수칙 (개정: 2026.02.02)</h3>
+                        <ol class="rules-list">
+                            <li><strong>근무시간</strong>: 월~금 오전 9시 ~ 오후 6시. 출근 시 <strong>Slack 출근 채널에 기록 필수</strong>. 9시 이후 출근 시 3일간 8:30 출근 자동 적용.</li>
+                            <li><strong>근무 태도</strong>: 근무 시간에는 연구(실험, 토의, 논문 읽기)에만 전념. 사적 전화는 연구실 밖에서.</li>
+                            <li><strong>PC/노트북</strong>: 개인 목적 사용 금지. PubMed 검색, EndNote, 데이터 작성 등 연구 목적만 허용. 근무 시간 이후는 자유.</li>
+                            <li><strong>에너지 절약</strong>: 마지막 퇴근자는 모든 비연구 장비 전원 차단.</li>
+                            <li><strong>휴가</strong>: 근무 경력에 따라 2~8일 배정 (3개월↓: 2일 / 6개월↓: 4일 / 1년↓: 6일 / 1년↑: 8일). 방장과 일정 사전 조율 필수.</li>
+                        </ol>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="sidebar-footer">
+                <p>© 2026 MSCSL. All Rights Reserved.</p>
+            </div>
+        </aside>
+        
+        <!-- 2. 우측 메인 대화 영역 -->
+        <main class="chat-container">
+            <!-- 챗봇 헤더 -->
+            <header class="chat-header">
+                <div class="header-left">
+                    <button class="menu-btn" id="menu-btn" aria-label="연구실 정보 보기">
+                        <i data-lucide="menu"></i>
+                    </button>
+                    <div class="bot-info-header">
+                        <div class="bot-avatar-small">
+                            <img src="assets/mscsl_logo.png" alt="챗봇 로고" class="bot-logo-small">
+                            <span class="status-indicator online"></span>
+                        </div>
+                        <div class="bot-title-header">
+                            <span class="bot-name">MSCSL AI Assistant</span>
+                            <span class="bot-status" id="connection-status">로컬 지식 모드 작동 중</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <button class="header-action-btn" id="settings-btn" title="AI 모델 설정" aria-label="AI 모델 설정">
+                        <i data-lucide="settings"></i>
+                    </button>
+                    <button class="header-action-btn" id="theme-toggle-btn" title="테마 변경" aria-label="테마 변경">
+                        <i data-lucide="moon" id="theme-icon"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- 대화 메시지 목록 영역 -->
+            <div class="chat-messages" id="chat-messages">
+                <!-- 메시지는 JS로 동적 렌더링되지만 첫 환영 메시지는 뼈대를 그려둠 -->
+                <div class="message-group bot">
+                    <div class="message-avatar">
+                        <img src="assets/mscsl_logo.png" alt="MSCSL AI">
+                    </div>
+                    <div class="message-bubble-wrapper">
+                        <div class="message-bubble">
+                            <p class="greeting-heading">안녕하세요! 대사성증후군 및 세포신호전달 연구실 (MSCSL) 챗봇에 오신 것을 환영합니다. 🧬</p>
+                            <p>저는 박종선 교수님 연구팀의 AI 비서입니다. 당뇨병, 암에너지 대사, 근감소증 등의 세포 신호전달 연구 성과나 연구실 이용 규칙, 위치 등 궁금한 내용을 물어보세요!</p>
+                        </div>
+                        
+                        <!-- 퀵링크 / 시나리오 버튼 템플릿 -->
+                        <div class="quick-replies-container">
+                            <button class="quick-reply-btn" data-payload="연구실 소개"><i data-lucide="home"></i> 연구실 소개</button>
+                            <button class="quick-reply-btn" data-payload="박종선 교수님 소개"><i data-lucide="user"></i> 박종선 교수님</button>
+                            <button class="quick-reply-btn" data-payload="당뇨병 연구 소개"><i data-lucide="droplet"></i> 당뇨병 연구</button>
+                            <button class="quick-reply-btn" data-payload="암에너지 대사 연구 소개"><i data-lucide="activity"></i> 암에너지 대사</button>
+                            <button class="quick-reply-btn" data-payload="근감소증 연구 소개"><i data-lucide="dumbbell"></i> 근감소증 연구</button>
+                            <button class="quick-reply-btn" data-payload="주요 논문 알려줘"><i data-lucide="book-open"></i> 주요 논문</button>
+                            <button class="quick-reply-btn" data-payload="미토스테라퓨틱스 소개"><i data-lucide="building-2"></i> 창업회사 소개</button>
+                            <button class="quick-reply-btn" data-payload="연구실 오시는 길"><i data-lucide="map-pin"></i> 오시는 길 & 규칙</button>
+                        </div>
+                        <span class="message-time">방금 전</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 입력창 영역 -->
+            <footer class="chat-input-footer">
+                <!-- 입력 편의용 팁 표시바 (추후 동적으로 상태 표시 가능) -->
+                <div class="input-tip-bar" id="input-tip-bar">
+                    <span>💡 Tip: 직접 텍스트로 질문을 입력하시거나 위 버튼을 클릭해 보세요.</span>
+                </div>
+                
+                <form class="chat-input-form" id="chat-form" autocomplete="off">
+                    <input type="text" id="chat-input" placeholder="질문을 입력하세요... (예: 당뇨병 연구가 궁금해)" aria-label="질문 입력창" required>
+                    <button type="submit" class="send-btn" id="send-btn" aria-label="메시지 전송">
+                        <i data-lucide="send"></i>
+                    </button>
+                </form>
+            </footer>
+        </main>
+        
+        <!-- 3. 설정 모달 (Gemini API 연동 설정) -->
+        <div class="modal-overlay" id="settings-modal">
+            <div class="modal-container card">
+                <div class="modal-header">
+                    <h3 class="modal-title"><i data-lucide="cpu"></i> AI 엔진 설정</h3>
+                    <button class="close-modal-btn" id="close-modal-btn" aria-label="설정 닫기">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">연구실 챗봇의 작동 엔진을 선택할 수 있습니다. 구글 Gemini API를 연결하면 자유로운 실시간 AI 대화가 가능해집니다.</p>
+                    
+                    <div class="engine-selector">
+                        <label class="engine-option">
+                            <input type="radio" name="ai-engine" value="local" checked id="engine-local">
+                            <span class="engine-card">
+                                <span class="engine-radio-icon"></span>
+                                <span class="engine-info">
+                                    <strong class="engine-name">로컬 지식 엔진 (무료/내장형)</strong>
+                                    <span class="engine-desc">연구실 전용 고유 내장 데이터를 기준으로 정밀하게 답변합니다.</span>
+                                </span>
+                            </span>
+                        </label>
+                        
+                        <label class="engine-option">
+                            <input type="radio" name="ai-engine" value="gemini" id="engine-gemini">
+                            <span class="engine-card">
+                                <span class="engine-radio-icon"></span>
+                                <span class="engine-info">
+                                    <strong class="engine-name">구글 Gemini 3.5 AI 연동 모드</strong>
+                                    <span class="engine-desc">내장 지식을 바탕으로 더욱 지능적이고 창의적인 답변을 제공합니다.</span>
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="api-key-input-group" id="api-key-group" style="display: none;">
+                        <label for="gemini-api-key" class="input-label">Gemini API Key</label>
+                        <div class="input-with-toggle">
+                            <input type="password" id="gemini-api-key" placeholder="AI_Key를 입력하세요 (AIzaSy...)" autocomplete="new-password">
+                            <button type="button" class="toggle-password-btn" id="toggle-password-btn" aria-label="비밀번호 보이기/숨기기">
+                                <i data-lucide="eye"></i>
+                            </button>
+                        </div>
+                        <div class="api-guide-box">
+                            <p class="api-guide-title"><i data-lucide="help-circle"></i> 무료 API Key 발급 방법</p>
+                            <ol class="api-guide-list">
+                                <li>구글에서 <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer">Google AI Studio</a>에 로그인합니다.</li>
+                                <li><strong>'Get API Key'</strong> 버튼을 클릭하여 새 키를 생성합니다.</li>
+                                <li>생성된 키를 이곳에 붙여넣고 저장하세요. (안전하게 브라우저 로컬 저장소에 보관됩니다.)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="settings-cancel">취소</button>
+                    <button class="btn btn-primary" id="settings-save">설정 저장</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PWA 및 메인 애플리케이션 스크립트 연결 -->
+    <script src="app.js"></script>
+</body>
+</html>
