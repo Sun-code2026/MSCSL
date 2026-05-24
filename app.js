@@ -719,6 +719,15 @@ async function fetchGeminiResponse(userQuery) {
     const API_KEY = appState.geminiApiKey;
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${API_KEY}`;
 
+    // 질문과 관련된 논문 최대 5편 검색
+    const relatedPapers = (typeof searchPapers === 'function') ? searchPapers(userQuery) : [];
+    const papersContext = relatedPapers.length > 0
+        ? '\n\n[질문 관련 MSCSL 논문 (PDF 데이터베이스 기반)]\n' +
+          relatedPapers.map((p, i) =>
+              `${i+1}. [${p.year}] ${p.journal} | ${p.id}\n   ${p.abstract}`
+          ).join('\n')
+        : '';
+
     const requestBody = {
         systemInstruction: {
             parts: [{
@@ -761,7 +770,7 @@ ${MSCSL_KNOWLEDGE.members}
 - 연구실이나 의학 관련 질문에 대해서는 최대한 상세하고 신뢰성 있게 학술적인 어조를 가미하여 답변해라.
 - PHF20, CTMP, LETM1, PI3K, PKB/Akt 등 핵심 연구 단백질에 대해서는 자신 있게 설명해라.
 - 제공된 정보 외의 답변이 필요할 때는 "연구실 공식 문서 이외의 전문 지식을 기반으로 보완하여 답변드립니다"라고 상기시키고 정확한 의학/생명과학 지식으로 보완해라.
-- 인사는 늘 공손하고 메디컬 연구실의 품위가 드러나게 해라.`
+- 인사는 늘 공손하고 메디컬 연구실의 품위가 드러나게 해라.${papersContext}`
             }]
         },
         contents: [
