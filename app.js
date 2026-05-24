@@ -717,7 +717,7 @@ function getLocalKnowledgeResponse(query) {
 // 20. 구글 Gemini API 통신 및 시스템 콘텍스트 주입 로직
 async function fetchGeminiResponse(userQuery) {
     const API_KEY = appState.geminiApiKey;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${API_KEY}`;
 
     const requestBody = {
         systemInstruction: {
