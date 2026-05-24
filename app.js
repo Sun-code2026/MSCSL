@@ -646,7 +646,7 @@ async function renderBotResponse(userQuery) {
             responseText = await fetchGeminiResponse(userQuery);
         } catch (error) {
             console.error('Gemini API Error:', error);
-            responseText = `⚠️ **Gemini AI 호출 중 오류가 발생했습니다.**\n\n로컬 지식 데이터베이스로 자동 전환하여 대신 답변을 드립니다:\n\n${getLocalKnowledgeResponse(userQuery)}`;
+            responseText = `⚠️ **Gemini AI 호출 오류**: ${error.message}\n\n로컬 지식 데이터베이스로 자동 전환하여 대신 답변을 드립니다:\n\n${getLocalKnowledgeResponse(userQuery)}`;
         }
     } else {
         // 로컬 지식 엔진 구동
