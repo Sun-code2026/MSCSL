@@ -1,0 +1,22 @@
+{
+  "name": "대사성증후군 및 세포신호전달 연구실 챗봇",
+  "short_name": "MSCSL 챗봇",
+  "description": "충남대학교 의과대학 약리학교실 대사성증후군 및 세포신호전달 연구실(MSCSL) 공식 AI 챗봇",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0f7f7",
+  "theme_color": "#0A5C5A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/mscsl_logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/mscsl_logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
