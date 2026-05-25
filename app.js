@@ -781,7 +781,7 @@ ${MSCSL_KNOWLEDGE.members}
         ],
         generationConfig: {
             temperature: 0.2,
-            maxOutputTokens: 1500
+            maxOutputTokens: 8192
         }
     };
 
